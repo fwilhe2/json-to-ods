@@ -1,0 +1,12 @@
+[
+    [
+        {
+            "value": "foo",
+            "type": "string"
+        },
+        {
+            "value": "23.32",
+            "type": "float"
+        }
+    ]
+]
