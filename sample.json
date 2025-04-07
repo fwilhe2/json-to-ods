@@ -8,5 +8,25 @@
             "value": "23.32",
             "type": "float"
         }
+    ],
+    [
+        {
+            "value": "2022-02-02",
+            "type": "date"
+        },
+        {
+            "value": "23.32",
+            "type": "float"
+        }
+    ],
+    [
+        {
+            "value": "SUM(B1:B2)",
+            "type": "formula"
+        },
+        {
+            "value": "AVERAGE(B1:B2)",
+            "type": "formula"
+        }
     ]
 ]

@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	rb "github.com/fwilhe2/rechenbrett"
+	"flag"
 	"os"
+	"strings"
+
+	rb "github.com/fwilhe2/rechenbrett"
 )
 
 type Cell struct {
@@ -18,7 +21,14 @@ func check(e error) {
 }
 
 func main() {
-	dat, err := os.ReadFile("sample.json")
+
+	flatPtr := flag.Bool("flat", false, "produce flat ods")
+	inputFilePtr := flag.String("input", "spreadsheet.json", "input json file")
+	outputFilePtr := flag.String("output", "spreadsheet.ods", "output (flat-)ods file")
+
+	flag.Parse()
+
+	dat, err := os.ReadFile(*inputFilePtr)
 	check(err)
 
 	var jsonCells [][]Cell
@@ -35,8 +45,22 @@ func main() {
 		xmlCells = append(xmlCells, xmlRow)
 	}
 
-	println(jsonCells)
 	spreadsheet := rb.MakeSpreadsheet(xmlCells)
 
-	println(rb.MakeFlatOds(spreadsheet))
+	if *flatPtr {
+		if strings.HasSuffix(*outputFilePtr, ".ods") {
+			*outputFilePtr = strings.Replace(*outputFilePtr, ".ods", ".fods", -1)
+		}
+		os.WriteFile(*outputFilePtr, []byte(rb.MakeFlatOds(spreadsheet)), 0644)
+	} else {
+		buff := rb.MakeOds(spreadsheet)
+
+		archive, err := os.Create(*outputFilePtr)
+		if err != nil {
+			panic(err)
+		}
+
+		archive.Write(buff.Bytes())
+		archive.Close()
+	}
 }
