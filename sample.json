@@ -6,7 +6,8 @@
         },
         {
             "value": "23.32",
-            "type": "float"
+            "type": "float",
+            "range": "one"
         }
     ],
     [
@@ -16,7 +17,8 @@
         },
         {
             "value": "23.32",
-            "type": "float"
+            "type": "float",
+            "range": "two"
         }
     ],
     [
