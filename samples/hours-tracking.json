@@ -1,0 +1,115 @@
+[
+    [
+        {
+            "value": "Employee Name",
+            "type": "string"
+        },
+        {
+            "value": "Date",
+            "type": "string"
+        },
+        {
+            "value": "Hours Worked",
+            "type": "string"
+        },
+        {
+            "value": "Total Weekly Hours",
+            "type": "string"
+        }
+    ],
+    [
+        {
+            "value": "Alice",
+            "type": "string"
+        },
+        {
+            "value": "2025-06-03",
+            "type": "date"
+        },
+        {
+            "value": "8.5",
+            "type": "float",
+            "range": "week1"
+        },
+        {
+            "value": "",
+            "type": "string"
+        }
+    ],
+    [
+        {
+            "value": "Alice",
+            "type": "string"
+        },
+        {
+            "value": "2025-06-04",
+            "type": "date"
+        },
+        {
+            "value": "7.0",
+            "type": "float",
+            "range": "week1"
+        },
+        {
+            "value": "",
+            "type": "string"
+        }
+    ],
+    [
+        {
+            "value": "Alice",
+            "type": "string"
+        },
+        {
+            "value": "2025-06-05",
+            "type": "date"
+        },
+        {
+            "value": "9.0",
+            "type": "float",
+            "range": "week1"
+        },
+        {
+            "value": "SUM(C2:C4)",
+            "type": "formula"
+        }
+    ],
+    [
+        {
+            "value": "Bob",
+            "type": "string"
+        },
+        {
+            "value": "2025-06-03",
+            "type": "date"
+        },
+        {
+            "value": "7.5",
+            "type": "float",
+            "range": "week1"
+        },
+        {
+            "value": "",
+            "type": "string"
+        }
+    ],
+    [
+        {
+            "value": "Bob",
+            "type": "string"
+        },
+        {
+            "value": "2025-06-04",
+            "type": "date"
+        },
+        {
+            "value": "8.0",
+            "type": "float",
+            "range": "week1"
+        },
+        {
+            "value": "SUM(C5:C6)",
+            "type": "formula"
+        }
+    ]
+]

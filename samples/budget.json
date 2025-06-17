@@ -1,0 +1,92 @@
+[
+    [
+        {
+            "value": "Category",
+            "type": "string"
+        },
+        {
+            "value": "Planned",
+            "type": "string"
+        },
+        {
+            "value": "Actual",
+            "type": "string"
+        },
+        {
+            "value": "Difference",
+            "type": "string"
+        }
+    ],
+    [
+        {
+            "value": "Rent",
+            "type": "string"
+        },
+        {
+            "value": "1500.00",
+            "type": "float"
+        },
+        {
+            "value": "1500.00",
+            "type": "float"
+        },
+        {
+            "value": "B2-C2",
+            "type": "formula"
+        }
+    ],
+    [
+        {
+            "value": "Groceries",
+            "type": "string"
+        },
+        {
+            "value": "400.00",
+            "type": "float"
+        },
+        {
+            "value": "420.50",
+            "type": "float"
+        },
+        {
+            "value": "B3-C3",
+            "type": "formula"
+        }
+    ],
+    [
+        {
+            "value": "Utilities",
+            "type": "string"
+        },
+        {
+            "value": "150.00",
+            "type": "float"
+        },
+        {
+            "value": "145.75",
+            "type": "float"
+        },
+        {
+            "value": "B4-C4",
+            "type": "formula"
+        }
+    ],
+    [
+        {
+            "value": "Total",
+            "type": "string"
+        },
+        {
+            "value": "SUM(B2:B4)",
+            "type": "formula"
+        },
+        {
+            "value": "SUM(C2:C4)",
+            "type": "formula"
+        },
+        {
+            "value": "SUM(D2:D4)",
+            "type": "formula"
+        }
+    ]
+]

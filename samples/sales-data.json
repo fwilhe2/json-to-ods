@@ -1,0 +1,58 @@
+[
+    [
+        {
+            "value": "Product A",
+            "type": "string"
+        },
+        {
+            "value": "Quantity",
+            "type": "string"
+        },
+        {
+            "value": "Price",
+            "type": "string"
+        }
+    ],
+    [
+        {
+            "value": "Laptop",
+            "type": "string"
+        },
+        {
+            "value": "5",
+            "type": "float"
+        },
+        {
+            "value": "1200.50",
+            "type": "float"
+        }
+    ],
+    [
+        {
+            "value": "Mouse",
+            "type": "string"
+        },
+        {
+            "value": "10",
+            "type": "float"
+        },
+        {
+            "value": "25.99",
+            "type": "float"
+        }
+    ],
+    [
+        {
+            "value": "Keyboard",
+            "type": "string"
+        },
+        {
+            "value": "7",
+            "type": "float"
+        },
+        {
+            "value": "75.00",
+            "type": "float"
+        }
+    ]
+]
