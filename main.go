@@ -32,22 +32,11 @@ func main() {
 	check(err)
 
 	var jsonCells [][]Cell
-	var xmlCells [][]rb.Cell
 
 	err = json.Unmarshal(dat, &jsonCells)
 	check(err)
 
-	for _, jsonRow := range jsonCells {
-		var xmlRow []rb.Cell
-		for _, jsonCell := range jsonRow {
-			if len(jsonCell.Range) > 0 {
-				xmlRow = append(xmlRow, rb.MakeRangeCell(jsonCell.Value, jsonCell.ValueType, jsonCell.Range))
-			} else {
-				xmlRow = append(xmlRow, rb.MakeCell(jsonCell.Value, jsonCell.ValueType))
-			}
-		}
-		xmlCells = append(xmlCells, xmlRow)
-	}
+	xmlCells := jsonCellsToXmlCells(jsonCells)
 
 	spreadsheet := rb.MakeSpreadsheet(xmlCells)
 
@@ -67,4 +56,21 @@ func main() {
 		archive.Write(buff.Bytes())
 		archive.Close()
 	}
+}
+
+func jsonCellsToXmlCells(jsonCells [][]Cell) [][]rb.Cell {
+	var xmlCells [][]rb.Cell
+
+	for _, jsonRow := range jsonCells {
+		var xmlRow []rb.Cell
+		for _, jsonCell := range jsonRow {
+			if len(jsonCell.Range) > 0 {
+				xmlRow = append(xmlRow, rb.MakeRangeCell(jsonCell.Value, jsonCell.ValueType, jsonCell.Range))
+			} else {
+				xmlRow = append(xmlRow, rb.MakeCell(jsonCell.Value, jsonCell.ValueType))
+			}
+		}
+		xmlCells = append(xmlCells, xmlRow)
+	}
+	return xmlCells
 }
