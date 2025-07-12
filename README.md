@@ -1,4 +1,4 @@
-# mkods
+# json-to-ods
 
 CLI tool to convert json files into Open Document Spreadsheet files.
 

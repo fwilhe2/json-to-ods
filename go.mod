@@ -1,4 +1,4 @@
-module github.com/fwilhe2/mkods
+module github.com/fwilhe2/json-to-ods
 
 go 1.19
 

@@ -14,7 +14,7 @@ test:
 	go test -v ./...
 
 install:
-	sudo install mkods /usr/local/bin
+	sudo install json-to-ods /usr/local/bin
 
 update:
 	go get -u
