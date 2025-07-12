@@ -15,6 +15,8 @@ type Cell struct {
 	Range     string `json:"range"`
 }
 
+var version = "dev"
+
 func check(e error) {
 	if e != nil {
 		panic(e)
@@ -25,8 +27,17 @@ func main() {
 	flatPtr := flag.Bool("flat", false, "produce flat ods")
 	inputFilePtr := flag.String("input", "spreadsheet.json", "input json file")
 	outputFilePtr := flag.String("output", "spreadsheet.ods", "output (flat-)ods file")
+	versionPtr := flag.Bool("version", false, "print version and exit")
 
 	flag.Parse()
+
+	if *versionPtr {
+		println("json-to-ods", version)
+		println("https://github.com/fwilhe2/json-to-ods")
+		println("Released under MIT License")
+		println("Copyright (c) 2025 Florian Wilhelm")
+		os.Exit(0)
+	}
 
 	dat, err := os.ReadFile(*inputFilePtr)
 	check(err)
