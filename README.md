@@ -4,6 +4,8 @@ CLI tool to convert json files into Open Document Spreadsheet files.
 
 Powered by [rechenbrett](https://github.com/fwilhe2/rechenbrett).
 
+Related: [csv-to-ods](https://github.com/fwilhe2/csv-to-ods)
+
 ## Motivation
 
 This tool is helpful to transform existing data into a spreadsheet in cases where this might help with understanding or analyzing data.
