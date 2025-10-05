@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "json-to-ods schema",
+  "description": "Schema for a spreadsheet to be used with github.com/fwilhe2/json-to-ods",
+  "type": "array",
+  "items": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The cell value, validated according to its type."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["string", "float", "date", "time", "currency", "formula"],
+          "description": "The semantic type of the cell value."
+        },
+        "range": {
+          "type": "string",
+          "description": "Optional logical grouping (e.g., 'week1')."
+        }
+      },
+      "required": ["value", "type"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "const": "string" } }
+          },
+          "then": {
+            "properties": {
+              "value": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "float" } }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^-?\\d+(\\.\\d+)?$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "currency" } }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^-?\\d+(\\.\\d+)?$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "date" } }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "format": "date",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "formula" } }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^(=|SUM\\(|AVERAGE\\(|[A-Z]+\\d+(:[A-Z]+\\d+)?)"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
