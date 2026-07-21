@@ -22,7 +22,7 @@
         { "value": "0.12", "type": "percentage", "style": { "fontColor": "#2ecc40" } }
     ],
     [
-        { "value": "South", "type": "string" },
+        { "value": "South", "type": "string", "style": { "italic": true } },
         { "value": "9800.00", "type": "currency-usd" },
         { "value": "-0.03", "type": "percentage", "style": { "fontColor": "#ff4136" } }
     ],

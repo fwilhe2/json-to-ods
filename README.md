@@ -85,6 +85,8 @@ The `type` of a cell may be one of:
 | `time` | `HH:MM` or `HH:MM:SS` | |
 | `formula` | e.g. `SUM(B1:B2)` | stored in OpenFormula notation |
 
+[`samples/value-types.json`](./samples/value-types.json) shows one row per type.
+
 ## Cell styling
 
 Any cell may carry an optional `style` object:
@@ -103,7 +105,8 @@ Any cell may carry an optional `style` object:
 }
 ```
 
-A cell may use either `style` or `range`, but not both.
+A cell may use either `style` or `range`, but not both. See
+[`samples/styled-report.json`](./samples/styled-report.json) for a full example.
 
 ## Format as Table
 
