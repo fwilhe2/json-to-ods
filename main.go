@@ -149,9 +149,17 @@ func makeCell(c Cell) (rb.Cell, error) {
 	case hasRange:
 		return rb.MakeRangeCell(c.Value, c.ValueType, c.Range), nil
 	case hasStyle:
+		background, err := resolveColor(c.Style.BackgroundColor)
+		if err != nil {
+			return rb.Cell{}, err
+		}
+		font, err := resolveColor(c.Style.FontColor)
+		if err != nil {
+			return rb.Cell{}, err
+		}
 		return rb.MakeStyledCell(c.Value, c.ValueType, rb.CellStyle{
-			BackgroundColor: c.Style.BackgroundColor,
-			FontColor:       c.Style.FontColor,
+			BackgroundColor: background,
+			FontColor:       font,
 			Bold:            c.Style.Bold,
 			Italic:          c.Style.Italic,
 			Border:          c.Style.Border,
@@ -159,6 +167,43 @@ func makeCell(c Cell) (rb.Cell, error) {
 	default:
 		return rb.MakeCell(c.Value, c.ValueType), nil
 	}
+}
+
+// namedColors maps the color names from rechenbrett's palette to their hex
+// values, so styles in the JSON can use "navy" instead of "#001f3f".
+var namedColors = map[string]string{
+	"navy":    rb.ColorNavy,
+	"blue":    rb.ColorBlue,
+	"aqua":    rb.ColorAqua,
+	"teal":    rb.ColorTeal,
+	"purple":  rb.ColorPurple,
+	"fuchsia": rb.ColorFuchsia,
+	"maroon":  rb.ColorMaroon,
+	"red":     rb.ColorRed,
+	"orange":  rb.ColorOrange,
+	"yellow":  rb.ColorYellow,
+	"olive":   rb.ColorOlive,
+	"green":   rb.ColorGreen,
+	"lime":    rb.ColorLime,
+	"black":   rb.ColorBlack,
+	"gray":    rb.ColorGray,
+	"grey":    rb.ColorGray,
+	"silver":  rb.ColorSilver,
+	"white":   rb.ColorWhite,
+}
+
+// resolveColor turns a style color from the JSON into a value rechenbrett
+// understands: an empty string (unset) and any "#..." hex code pass through
+// unchanged, a known palette name resolves to its hex value, and anything else
+// is rejected rather than emitted as an invalid color.
+func resolveColor(c string) (string, error) {
+	if c == "" || strings.HasPrefix(c, "#") {
+		return c, nil
+	}
+	if hex, ok := namedColors[strings.ToLower(c)]; ok {
+		return hex, nil
+	}
+	return "", fmt.Errorf("unknown color %q (use a #hex code or a named color)", c)
 }
 
 func parseTableStyle(s string) (rb.TableStyle, error) {

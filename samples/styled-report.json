@@ -3,28 +3,28 @@
         {
             "value": "Region",
             "type": "string",
-            "style": { "backgroundColor": "#00599d", "fontColor": "#ffffff", "bold": true }
+            "style": { "backgroundColor": "#00599d", "fontColor": "white", "bold": true }
         },
         {
             "value": "Revenue",
             "type": "string",
-            "style": { "backgroundColor": "#00599d", "fontColor": "#ffffff", "bold": true }
+            "style": { "backgroundColor": "#00599d", "fontColor": "white", "bold": true }
         },
         {
             "value": "Growth",
             "type": "string",
-            "style": { "backgroundColor": "#00599d", "fontColor": "#ffffff", "bold": true }
+            "style": { "backgroundColor": "#00599d", "fontColor": "white", "bold": true }
         }
     ],
     [
         { "value": "North", "type": "string" },
         { "value": "12500.00", "type": "currency-usd" },
-        { "value": "0.12", "type": "percentage", "style": { "fontColor": "#2ecc40" } }
+        { "value": "0.12", "type": "percentage", "style": { "fontColor": "green" } }
     ],
     [
         { "value": "South", "type": "string", "style": { "italic": true } },
         { "value": "9800.00", "type": "currency-usd" },
-        { "value": "-0.03", "type": "percentage", "style": { "fontColor": "#ff4136" } }
+        { "value": "-0.03", "type": "percentage", "style": { "fontColor": "red" } }
     ],
     [
         {

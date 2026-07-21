@@ -60,6 +60,53 @@ func TestRangeAndStyleAreMutuallyExclusive(t *testing.T) {
 	}
 }
 
+func TestResolveColor(t *testing.T) {
+	cases := map[string]string{
+		"":        "",            // unset passes through
+		"#00599d": "#00599d",     // literal hex passes through
+		"navy":    rb.ColorNavy,  // palette name resolves
+		"WHITE":   rb.ColorWhite, // case-insensitive
+		"grey":    rb.ColorGray,  // british spelling aliases gray
+	}
+	for in, want := range cases {
+		got, err := resolveColor(in)
+		if err != nil {
+			t.Errorf("resolveColor(%q) unexpected error: %v", in, err)
+		}
+		if got != want {
+			t.Errorf("resolveColor(%q) = %q, want %q", in, got, want)
+		}
+	}
+
+	if _, err := resolveColor("chartreuse"); err == nil {
+		t.Error("expected an error for an unknown color name")
+	}
+}
+
+func TestNamedColorInCell(t *testing.T) {
+	cells := [][]Cell{{{
+		Value:     "x",
+		ValueType: "string",
+		Style:     &Style{BackgroundColor: "navy"},
+	}}}
+
+	xml, err := jsonCellsToXmlCells(cells)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	sheet, err := rb.MakeSpreadsheet(xml)
+	if err != nil {
+		t.Fatalf("MakeSpreadsheet: %v", err)
+	}
+	flat, err := rb.MakeFlatOds(sheet)
+	if err != nil {
+		t.Fatalf("MakeFlatOds: %v", err)
+	}
+	if !strings.Contains(flat, rb.ColorNavy) {
+		t.Errorf("expected the resolved navy hex %q in the output", rb.ColorNavy)
+	}
+}
+
 func TestParseTableStyle(t *testing.T) {
 	cases := map[string]rb.TableStyle{
 		"":      rb.TableStyleBlue,

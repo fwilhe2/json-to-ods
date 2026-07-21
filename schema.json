@@ -38,11 +38,13 @@
           "properties": {
             "backgroundColor": {
               "type": "string",
-              "description": "Fill color as a hex string, e.g. '#ffdc00'."
+              "description": "Fill color: a hex string like '#ffdc00', or a palette name (navy, blue, aqua, teal, purple, fuchsia, maroon, red, orange, yellow, olive, green, lime, black, gray, silver, white).",
+              "pattern": "^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|navy|blue|aqua|teal|purple|fuchsia|maroon|red|orange|yellow|olive|green|lime|black|gray|grey|silver|white)$"
             },
             "fontColor": {
               "type": "string",
-              "description": "Font color as a hex string, e.g. '#ff0000'."
+              "description": "Font color: a hex string like '#ff0000', or a palette name (navy, blue, aqua, teal, purple, fuchsia, maroon, red, orange, yellow, olive, green, lime, black, gray, silver, white).",
+              "pattern": "^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|navy|blue|aqua|teal|purple|fuchsia|maroon|red|orange|yellow|olive|green|lime|black|gray|grey|silver|white)$"
             },
             "bold": { "type": "boolean" },
             "italic": { "type": "boolean" },

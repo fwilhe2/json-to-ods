@@ -96,7 +96,7 @@ Any cell may carry an optional `style` object:
     "value": "Total",
     "type": "string",
     "style": {
-        "backgroundColor": "#ffdc00",
+        "backgroundColor": "yellow",
         "fontColor": "#111111",
         "bold": true,
         "italic": false,
@@ -104,6 +104,11 @@ Any cell may carry an optional `style` object:
     }
 }
 ```
+
+`backgroundColor` and `fontColor` accept either a `#hex` code or one of the
+[rechenbrett palette](https://clrs.cc/) names (case-insensitive): `navy`,
+`blue`, `aqua`, `teal`, `purple`, `fuchsia`, `maroon`, `red`, `orange`,
+`yellow`, `olive`, `green`, `lime`, `black`, `gray`, `silver`, `white`.
 
 A cell may use either `style` or `range`, but not both. See
 [`samples/styled-report.json`](./samples/styled-report.json) for a full example.
