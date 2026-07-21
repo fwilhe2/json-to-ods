@@ -28,8 +28,7 @@
         },
         {
             "value": "8.5",
-            "type": "float",
-            "range": "week1"
+            "type": "float"
         },
         {
             "value": "",
@@ -47,8 +46,7 @@
         },
         {
             "value": "7.0",
-            "type": "float",
-            "range": "week1"
+            "type": "float"
         },
         {
             "value": "",
@@ -66,8 +64,7 @@
         },
         {
             "value": "9.0",
-            "type": "float",
-            "range": "week1"
+            "type": "float"
         },
         {
             "value": "SUM(C2:C4)",
@@ -85,8 +82,7 @@
         },
         {
             "value": "7.5",
-            "type": "float",
-            "range": "week1"
+            "type": "float"
         },
         {
             "value": "",
@@ -104,8 +100,7 @@
         },
         {
             "value": "8.0",
-            "type": "float",
-            "range": "week1"
+            "type": "float"
         },
         {
             "value": "SUM(C5:C6)",
