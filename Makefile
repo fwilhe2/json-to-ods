@@ -22,7 +22,9 @@ update:
 
 demo:
 	go run . -input sample.json -flat
-	find samples -type f -name '*.json' -exec go run . -input {} -flat -output {}.fods \;
+	find samples -type f -name '*.json' ! -name 'hours-tracking.json' -exec go run . -input {} -flat -output {}.fods \;
+	go run . -input samples/hours-tracking.json -flat -output samples/hours-tracking.json.fods \
+		-table -header -structured-refs -banded -autofilter -totals "none,sum,sum,sum,sum,sum,sum"
 
 clean:
 	rm *ods
