@@ -121,16 +121,22 @@ with the following options:
 | `-table-name` | name of the table / database range |
 | `-totals` | comma-separated totals row, one entry per column: `none`, `sum`, `average`, `count`, `min`, `max` |
 
-For example, to render a table with a header, banded rows, filter buttons,
-column-named ranges and a summed totals row:
+For example, [`samples/hours-tracking.json`](./samples/hours-tracking.json) has a
+header row, one row per employee, a day-of-week column each, and a per-employee
+`Weekly Total` column (`SUM` across the day columns). Rendering it as a table
+with a header, banded rows, filter buttons, column-named ranges and a summed
+totals row:
 
 ```bash
-json-to-ods -input input.json -flat -output output.fods \
+json-to-ods -input samples/hours-tracking.json -flat -output hours-tracking.fods \
   -table -header -banded -autofilter -structured-refs \
-  -table-style green -totals "none,sum,sum"
+  -totals "none,sum,sum,sum,sum,sum,sum"
 ```
 
-Totals use `SUBTOTAL`, so they respect the AutoFilter state (hidden rows are excluded).
+With `-structured-refs` each column header becomes a named range (`Mon`, `Tue`,
+… `Weekly_Total`), so the generated totals row reads `SUBTOTAL(9;Mon)` rather
+than raw cell addresses. Totals use `SUBTOTAL`, so they respect the AutoFilter
+state (hidden rows are excluded).
 
 ## License
 
