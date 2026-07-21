@@ -146,6 +146,35 @@ With `-structured-refs` each column header becomes a named range (`Mon`, `Tue`,
 than raw cell addresses. Totals use `SUBTOTAL`, so they respect the AutoFilter
 state (hidden rows are excluded).
 
+### More examples
+
+The commands below use the three-column
+[`samples/sales-data.json`](./samples/sales-data.json) (`Product A`, `Quantity`,
+`Price`):
+
+```bash
+# -table / -header: mark the block as a table with a styled header row
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header
+
+# -banded: shade alternating body rows
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -banded
+
+# -table-style: pick a color theme (blue is the default; gray and green also exist)
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -table-style green
+
+# -autofilter / -table-name: filter dropdowns; -table-name names the filter range
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -autofilter -table-name Sales
+
+# -structured-refs: one named range per column, referenced by the totals row
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -structured-refs -totals "none,sum,average"
+
+# -totals: one aggregate per column (none, sum, average, count, min, max)
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -totals "count,min,max"
+```
+
+`-table-name` sets the name of the AutoFilter database range, so it only has a
+visible effect together with `-autofilter`.
+
 ## License
 
 This software is written by Florian Wilhelm and available under the MIT license (see `LICENSE` for details)
