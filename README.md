@@ -69,6 +69,112 @@ Use the `.ods` file extension in that case.
 
 Check the [samples](./samples/) directory for more sample files.
 
+## Cell types
+
+The `type` of a cell may be one of:
+
+| type | value format | notes |
+| --- | --- | --- |
+| `string` | any text | |
+| `float` | `-?\d+(\.\d+)?` | |
+| `percentage` | `-?\d+(\.\d+)?` | `0.15` renders as `15 %` |
+| `currency` / `currency-eur` | `-?\d+(\.\d+)?` | euro |
+| `currency-usd` | `-?\d+(\.\d+)?` | US dollar |
+| `currency-gbp` | `-?\d+(\.\d+)?` | pound sterling |
+| `date` | `YYYY-MM-DD` | |
+| `time` | `HH:MM` or `HH:MM:SS` | |
+| `formula` | e.g. `SUM(B1:B2)` | stored in OpenFormula notation |
+
+[`samples/value-types.json`](./samples/value-types.json) shows one row per type.
+
+## Cell styling
+
+Any cell may carry an optional `style` object:
+
+```json
+{
+    "value": "Total",
+    "type": "string",
+    "style": {
+        "backgroundColor": "yellow",
+        "fontColor": "#111111",
+        "bold": true,
+        "italic": false,
+        "border": "0.5pt solid #000000"
+    }
+}
+```
+
+`backgroundColor` and `fontColor` accept either a `#hex` code or one of the
+[rechenbrett palette](https://clrs.cc/) names (case-insensitive): `navy`,
+`blue`, `aqua`, `teal`, `purple`, `fuchsia`, `maroon`, `red`, `orange`,
+`yellow`, `olive`, `green`, `lime`, `black`, `gray`, `silver`, `white`.
+
+A cell may use either `style` or `range`, but not both. See
+[`samples/styled-report.json`](./samples/styled-report.json) for a full example.
+
+## Format as Table
+
+Pass `-table` to mark the whole block as an Excel-style table ("Format as Table"),
+with the following options:
+
+| flag | effect |
+| --- | --- |
+| `-table` | enable table mode |
+| `-header` | treat the first row as a styled header |
+| `-banded` | shade alternating body rows |
+| `-autofilter` | add AutoFilter dropdown buttons (also works without `-table`) |
+| `-structured-refs` | create a named range per column, named after its header (requires `-header`) |
+| `-table-style` | color theme: `blue` (default), `gray` or `green` |
+| `-table-name` | name of the table / database range |
+| `-totals` | comma-separated totals row, one entry per column: `none`, `sum`, `average`, `count`, `min`, `max` |
+
+For example, [`samples/hours-tracking.json`](./samples/hours-tracking.json) has a
+header row, one row per employee, a day-of-week column each, and a per-employee
+`Weekly Total` column (`SUM` across the day columns). Rendering it as a table
+with a header, banded rows, filter buttons, column-named ranges and a summed
+totals row:
+
+```bash
+json-to-ods -input samples/hours-tracking.json -flat -output hours-tracking.fods \
+  -table -header -banded -autofilter -structured-refs \
+  -totals "none,sum,sum,sum,sum,sum,sum"
+```
+
+With `-structured-refs` each column header becomes a named range (`Mon`, `Tue`,
+… `Weekly_Total`), so the generated totals row reads `SUBTOTAL(9;Mon)` rather
+than raw cell addresses. Totals use `SUBTOTAL`, so they respect the AutoFilter
+state (hidden rows are excluded).
+
+### More examples
+
+The commands below use the three-column
+[`samples/sales-data.json`](./samples/sales-data.json) (`Product A`, `Quantity`,
+`Price`):
+
+```bash
+# -table / -header: mark the block as a table with a styled header row
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header
+
+# -banded: shade alternating body rows
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -banded
+
+# -table-style: pick a color theme (blue is the default; gray and green also exist)
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -table-style green
+
+# -autofilter / -table-name: filter dropdowns; -table-name names the filter range
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -autofilter -table-name Sales
+
+# -structured-refs: one named range per column, referenced by the totals row
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -structured-refs -totals "none,sum,average"
+
+# -totals: one aggregate per column (none, sum, average, count, min, max)
+json-to-ods -input samples/sales-data.json -flat -output sales.fods -table -header -totals "count,min,max"
+```
+
+`-table-name` sets the name of the AutoFilter database range, so it only has a
+visible effect together with `-autofilter`.
+
 ## License
 
 This software is written by Florian Wilhelm and available under the MIT license (see `LICENSE` for details)

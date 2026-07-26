@@ -14,15 +14,50 @@
         },
         "type": {
           "type": "string",
-          "enum": ["string", "float", "date", "time", "currency", "formula"],
+          "enum": [
+            "string",
+            "float",
+            "date",
+            "time",
+            "percentage",
+            "currency",
+            "currency-eur",
+            "currency-usd",
+            "currency-gbp",
+            "formula"
+          ],
           "description": "The semantic type of the cell value."
         },
         "range": {
           "type": "string",
-          "description": "Optional logical grouping (e.g., 'week1')."
+          "description": "Optional named range for this single cell, so formulas elsewhere can refer to it by name. Mutually exclusive with 'style'."
+        },
+        "style": {
+          "type": "object",
+          "description": "Optional cell appearance. Mutually exclusive with 'range'.",
+          "properties": {
+            "backgroundColor": {
+              "type": "string",
+              "description": "Fill color: a hex string like '#ffdc00', or a palette name (navy, blue, aqua, teal, purple, fuchsia, maroon, red, orange, yellow, olive, green, lime, black, gray, silver, white).",
+              "pattern": "^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|navy|blue|aqua|teal|purple|fuchsia|maroon|red|orange|yellow|olive|green|lime|black|gray|grey|silver|white)$"
+            },
+            "fontColor": {
+              "type": "string",
+              "description": "Font color: a hex string like '#ff0000', or a palette name (navy, blue, aqua, teal, purple, fuchsia, maroon, red, orange, yellow, olive, green, lime, black, gray, silver, white).",
+              "pattern": "^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|navy|blue|aqua|teal|purple|fuchsia|maroon|red|orange|yellow|olive|green|lime|black|gray|grey|silver|white)$"
+            },
+            "bold": { "type": "boolean" },
+            "italic": { "type": "boolean" },
+            "border": {
+              "type": "string",
+              "description": "ODF fo:border shorthand applied to all four sides, e.g. '0.5pt solid #000000'."
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": ["value", "type"],
+      "not": { "required": ["range", "style"] },
       "additionalProperties": false,
       "allOf": [
         {
@@ -50,13 +85,30 @@
         },
         {
           "if": {
-            "properties": { "type": { "const": "currency" } }
+            "properties": {
+              "type": {
+                "enum": ["currency", "currency-eur", "currency-usd", "currency-gbp", "percentage"]
+              }
+            }
           },
           "then": {
             "properties": {
               "value": {
                 "type": "string",
                 "pattern": "^-?\\d+(\\.\\d+)?$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "time" } }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2})?$"
               }
             }
           }

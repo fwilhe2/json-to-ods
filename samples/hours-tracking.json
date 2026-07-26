@@ -1,115 +1,38 @@
 [
     [
-        {
-            "value": "Employee Name",
-            "type": "string"
-        },
-        {
-            "value": "Date",
-            "type": "string"
-        },
-        {
-            "value": "Hours Worked",
-            "type": "string"
-        },
-        {
-            "value": "Total Weekly Hours",
-            "type": "string"
-        }
+        { "value": "Employee", "type": "string" },
+        { "value": "Mon", "type": "string" },
+        { "value": "Tue", "type": "string" },
+        { "value": "Wed", "type": "string" },
+        { "value": "Thu", "type": "string" },
+        { "value": "Fri", "type": "string" },
+        { "value": "Weekly Total", "type": "string" }
     ],
     [
-        {
-            "value": "Alice",
-            "type": "string"
-        },
-        {
-            "value": "2025-06-03",
-            "type": "date"
-        },
-        {
-            "value": "8.5",
-            "type": "float",
-            "range": "week1"
-        },
-        {
-            "value": "",
-            "type": "string"
-        }
+        { "value": "Alice", "type": "string" },
+        { "value": "8.5", "type": "float" },
+        { "value": "7.0", "type": "float" },
+        { "value": "9.0", "type": "float" },
+        { "value": "8.0", "type": "float" },
+        { "value": "7.5", "type": "float" },
+        { "value": "SUM(B2:F2)", "type": "formula" }
     ],
     [
-        {
-            "value": "Alice",
-            "type": "string"
-        },
-        {
-            "value": "2025-06-04",
-            "type": "date"
-        },
-        {
-            "value": "7.0",
-            "type": "float",
-            "range": "week1"
-        },
-        {
-            "value": "",
-            "type": "string"
-        }
+        { "value": "Bob", "type": "string" },
+        { "value": "7.5", "type": "float" },
+        { "value": "8.0", "type": "float" },
+        { "value": "8.0", "type": "float" },
+        { "value": "7.0", "type": "float" },
+        { "value": "6.5", "type": "float" },
+        { "value": "SUM(B3:F3)", "type": "formula" }
     ],
     [
-        {
-            "value": "Alice",
-            "type": "string"
-        },
-        {
-            "value": "2025-06-05",
-            "type": "date"
-        },
-        {
-            "value": "9.0",
-            "type": "float",
-            "range": "week1"
-        },
-        {
-            "value": "SUM(C2:C4)",
-            "type": "formula"
-        }
-    ],
-    [
-        {
-            "value": "Bob",
-            "type": "string"
-        },
-        {
-            "value": "2025-06-03",
-            "type": "date"
-        },
-        {
-            "value": "7.5",
-            "type": "float",
-            "range": "week1"
-        },
-        {
-            "value": "",
-            "type": "string"
-        }
-    ],
-    [
-        {
-            "value": "Bob",
-            "type": "string"
-        },
-        {
-            "value": "2025-06-04",
-            "type": "date"
-        },
-        {
-            "value": "8.0",
-            "type": "float",
-            "range": "week1"
-        },
-        {
-            "value": "SUM(C5:C6)",
-            "type": "formula"
-        }
+        { "value": "Carol", "type": "string" },
+        { "value": "8.0", "type": "float" },
+        { "value": "8.0", "type": "float" },
+        { "value": "8.0", "type": "float" },
+        { "value": "8.0", "type": "float" },
+        { "value": "4.0", "type": "float" },
+        { "value": "SUM(B4:F4)", "type": "formula" }
     ]
 ]
